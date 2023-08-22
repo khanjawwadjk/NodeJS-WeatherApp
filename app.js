@@ -22,7 +22,11 @@ app.get('/Weather/:city', (req, res)=>{
         if(err) throw err;
         let response = JSON.parse(apiResponse.body);
         console.log('response >>>', response)
-        res.render('index', {title:"Weather App",result: response})
+        if(response.cod === 404 || response.cod === '404'){
+            res.render('notFound')
+        }else{
+            res.render('index', {title:"Weather App",result: response})
+        }
     })
 })
 
